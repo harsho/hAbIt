@@ -6,7 +6,7 @@ import ClearActions from "@/components/habits/clear-actions";
 import SignOutButton from "@/components/auth/signout-button";
 
 export default async function Home() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { data, error } = await supabase.auth.getUser();
 
