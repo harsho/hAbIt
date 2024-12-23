@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { Habit } from "@/lib/interface";
 
 export async function addHabit(formData: FormData) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },
@@ -31,7 +31,7 @@ export async function addHabit(formData: FormData) {
 }
 
 export async function editHabit(habit: Habit) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },
@@ -50,7 +50,7 @@ export async function editHabit(habit: Habit) {
 }
 
 export async function deleteHabit(id: number) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { error } = await supabase.from("habits").delete().eq("id", id);
 
@@ -62,7 +62,7 @@ export async function deleteHabit(id: number) {
 }
 
 export async function deleteCompletedHabits() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { error } = await supabase
     .from("habits")
@@ -77,7 +77,7 @@ export async function deleteCompletedHabits() {
 }
 
 export async function deleteAllHabits() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },
@@ -96,7 +96,7 @@ export async function deleteAllHabits() {
 }
 
 export async function onCheckChange(habit: Habit) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { error } = await supabase
     .from("habits")

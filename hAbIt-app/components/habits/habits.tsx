@@ -3,7 +3,7 @@ import Habit from "./habit";
 import AddHabit from "./add-habit";
 
 export default async function Habits() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { data: habits, error } = await supabase.from("habits").select("*");
 
