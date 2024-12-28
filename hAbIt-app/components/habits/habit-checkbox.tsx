@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { onCheckChange } from "@/actions/habits/actions";
 import type { Habit } from "@/lib/interface";
 
-export default function TodoCheckbox({ habit }: { habit: Habit }) {
+export default function HabitCheckbox({ habit }: { habit: Habit }) {
   return (
     <Checkbox
       className="mt-0.5 w-5 h-5"

@@ -21,10 +21,10 @@ export default function AddHabit() {
         <PlusIcon className="w-4 h-4" />
       </Button>
       <Input
-        id="task"
+        id="habit_name"
         className="p-0 border-none focus-visible:ring-transparent"
-        name="task"
-        placeholder="Add new task"
+        name="habit_name"
+        placeholder="Add new habit"
         required
       />
     </form>

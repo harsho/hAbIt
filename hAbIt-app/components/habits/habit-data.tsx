@@ -6,14 +6,14 @@ import { Input } from "@/components/ui/input";
 import type { Habit } from "@/lib/interface";
 
 export default function HabitData({ habit }: { habit: Habit }) {
-  const [description, setDescription] = useState(habit.task);
+  const [description, setDescription] = useState(habit.habit_name);
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(
     null,
   );
 
   useEffect(() => {
-    setDescription(habit.task);
-  }, [habit.task]);
+    setDescription(habit.habit_name);
+  }, [habit.habit_name]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -27,7 +27,7 @@ export default function HabitData({ habit }: { habit: Habit }) {
     // Set a new timeout
     setTypingTimeout(
       setTimeout(async () => {
-        await editHabit({ ...habit, task: e.target.value });
+        await editHabit({ ...habit, habit_name: e.target.value });
       }, 2000),
     );
   };

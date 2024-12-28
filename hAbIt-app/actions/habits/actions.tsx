@@ -16,7 +16,7 @@ export async function addHabit(formData: FormData) {
     .insert([
       {
         user_id: user?.id,
-        task: formData.get("task") as string,
+        habit_name: formData.get("habit_name") as string,
         is_complete: false,
         inserted_at: new Date(),
       },
@@ -39,7 +39,7 @@ export async function editHabit(habit: Habit) {
 
   const { error } = await supabase
     .from("habits")
-    .update({ task: habit.task })
+    .update({ habit: habit.habit_name })
     .eq("id", habit.id)
     .eq("user_id", user?.id)
     .select();
