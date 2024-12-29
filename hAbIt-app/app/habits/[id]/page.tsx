@@ -22,6 +22,8 @@ export default function HabitEditorPage({ params }: { params: { id: string } }) 
   const [loading, setLoading] = useState(true);
   const [habitName, setHabitName] = useState('');
   const [description, setDescription] = useState('');
+  const [improvementAreas, setImprovementAreas] = useState(''); 
+  const [completionFrequency, setCompletionFrequency] = useState(''); 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -45,6 +47,8 @@ export default function HabitEditorPage({ params }: { params: { id: string } }) 
       setHabit(habit);
       setHabitName(habit.habit_name || '');
       setDescription(habit.description || '');
+      setImprovementAreas(habit.improvement_areas || ''); 
+      setCompletionFrequency(habit.completion_frequency || ''); 
       setLoading(false);
     };
 
@@ -58,10 +62,24 @@ export default function HabitEditorPage({ params }: { params: { id: string } }) 
     try {
       if (!habit) return;
 
+      console.log('Submitting Habit:', {
+        habitName,
+        description,
+        improvementAreas,
+        completionFrequency,
+      });
+
+      console.log('habitName:', habitName);
+      console.log('description:', description);
+      console.log('improvementAreas:', improvementAreas);
+      console.log('completionFrequency:', completionFrequency);
+
       await editHabit({
         ...habit,
         habit_name: habitName,
         description: description,
+        improvement_areas: improvementAreas, 
+        completion_frequency: completionFrequency, 
       });
       
       router.push('/');
@@ -111,6 +129,36 @@ export default function HabitEditorPage({ params }: { params: { id: string } }) 
                 className="min-h-[100px]"
               />
             </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="improvementArea">Improvement Area</Label>
+              <select
+                id="improvementArea"
+                value={improvementAreas}
+                onChange={(e) => setImprovementAreas(e.target.value)}
+                required
+              >
+                <option value="fitness">Fitness</option>
+                <option value="finance">Finance</option>
+                <option value="health">Health</option>
+                <option value="education">Education</option>
+              </select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="completionFrequency">Completion Frequency</Label>
+              <select
+                id="completionFrequency"
+                value={completionFrequency}
+                onChange={(e) => setCompletionFrequency(e.target.value)}
+                required
+              >
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
           </CardContent>
           <CardFooter className="flex justify-between">
             <Button
@@ -122,7 +170,7 @@ export default function HabitEditorPage({ params }: { params: { id: string } }) 
             </Button>
             <Button
               type="submit"
-              disabled={isSubmitting || !habitName.trim()}
+              disabled={isSubmitting || !habitName.trim() || !improvementAreas.trim() || !completionFrequency.trim()}
             >
               {isSubmitting ? 'Saving...' : 'Save Changes'}
             </Button>
