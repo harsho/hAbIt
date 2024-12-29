@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
-
 import Habits from "@/components/habits/habits";
 import Metrics from "@/components/metrics/metrics";
 import Dashboard from "@/components/dashboard/dashboard";
@@ -15,6 +14,8 @@ export default async function Home() {
   if (error || !data?.user) {
     redirect("/signin");
   }
+
+  
 
   return (
     <main className="min-h-screen flex flex-col gap-4 items-center justify-center">
@@ -33,8 +34,9 @@ export default async function Home() {
           <CheckCircleIcon className="h-8 w-8 text-gray-500 dark:text-gray-400" />
           <h1 className="font-semibold text-2xl">Dashboard</h1>
         </div>
-        {/* Add your dashboard content here */}
+        <Dashboard/>
       </div>
+      
 
       <div className="flex flex-col max-w-2xl border rounded-lg shadow-lg p-4 mt-4">
         <div className="flex items-center gap-4 pb-4">

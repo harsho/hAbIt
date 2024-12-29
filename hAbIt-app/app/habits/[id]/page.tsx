@@ -31,10 +31,13 @@ export default function HabitEditorPage({ params }: { params: { id: string } }) 
 
   useEffect(() => {
     const fetchHabit = async () => {
+      // Unwrap params using React.use()
+      const id = await params.id; // Unwrap the Promise
+
       const { data: habit, error } = await supabase
         .from('habits')
         .select('*')
-        .eq('id', params.id)
+        .eq('id', id)
         .single();
 
       if (error) {
@@ -53,7 +56,10 @@ export default function HabitEditorPage({ params }: { params: { id: string } }) 
     };
 
     fetchHabit();
-  }, [params.id]);
+  }, [params]);
+
+ 
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
