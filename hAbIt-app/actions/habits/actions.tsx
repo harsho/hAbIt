@@ -39,20 +39,33 @@ export async function editHabit(habit: Habit) {
 
   const { error } = await supabase
     .from("habits")
-    .update({ habit: habit.habit_name })
+    .update({ 
+      habit_name: habit.habit_name,
+      description: habit.description,
+      updated_at: new Date().toISOString()
+    })
     .eq("id", habit.id)
-    .eq("user_id", user?.id)
-    .select();
+    .eq("user_id", user?.id);
 
   if (error) {
     throw new Error(error.message);
   }
+
+  revalidatePath("/");
 }
 
 export async function deleteHabit(id: number) {
   const supabase = await createClient();
 
-  const { error } = await supabase.from("habits").delete().eq("id", id);
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const { error } = await supabase
+    .from("habits")
+    .delete()
+    .eq("id", id)
+    .eq("user_id", user?.id);
 
   if (error) {
     throw new Error(error.message);
@@ -64,9 +77,14 @@ export async function deleteHabit(id: number) {
 export async function deleteCompletedHabits() {
   const supabase = await createClient();
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   const { error } = await supabase
     .from("habits")
     .delete()
+    .eq("user_id", user?.id)
     .eq("is_complete", true);
 
   if (error) {
@@ -98,11 +116,18 @@ export async function deleteAllHabits() {
 export async function onCheckChange(habit: Habit) {
   const supabase = await createClient();
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   const { error } = await supabase
     .from("habits")
-    .update({ is_complete: !habit?.is_complete })
-    .eq("id", habit?.id)
-    .select();
+    .update({ 
+      is_complete: !habit.is_complete,
+      updated_at: new Date().toISOString()
+    })
+    .eq("id", habit.id)
+    .eq("user_id", user?.id);
 
   if (error) {
     throw new Error(error.message);

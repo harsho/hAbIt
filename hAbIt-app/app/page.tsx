@@ -3,7 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 
 import Habits from "@/components/habits/habits";
 import ClearActions from "@/components/habits/clear-actions";
-import SignOutButton from "@/components/auth/signout-button";
+import NavBar from "@/components/navigation/nav-bar";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -16,6 +16,7 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen flex flex-col gap-4 items-center justify-center">
+      <NavBar />
       <div className="flex flex-col max-w-2xl border rounded-lg shadow-lg p-4">
         <div className="flex items-center gap-4 pb-4">
           <CheckCircleIcon className="h-8 w-8 text-gray-500 dark:text-gray-400" />
@@ -24,7 +25,6 @@ export default async function Home() {
         <Habits />
         <ClearActions />
       </div>
-      <SignOutButton />
     </main>
   );
 }
