@@ -42,6 +42,8 @@ export async function editHabit(habit: Habit) {
     .update({ 
       habit_name: habit.habit_name,
       description: habit.description,
+      improvement_areas: habit.improvement_areas,
+      completion_frequency: habit.completion_frequency,
       updated_at: new Date().toISOString()
     })
     .eq("id", habit.id)
