@@ -5,12 +5,17 @@ import logging
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from pathlib import Path
-load_dotenv(Path("/Users/harshao/Documents/pythontutorial/hAbIt/backend/.env.local"))
+#load_dotenv(Path("/Users/harshao/Documents/pythontutorial/hAbIt/hAbIt-app/api/.env.local"))
 
 
 app = FastAPI()
 # Load the environment variables from .env.local
-load_dotenv('.env.local')
+#load_dotenv('.env.local')
+print(os.getenv('ENV') )
+if os.getenv('ENV') == 'development':
+    load_dotenv('.env.local')  # Local development
+else:
+    load_dotenv()
 
 # Access the API key
 openai_api_key = os.getenv('OPENAI_API_KEY')
