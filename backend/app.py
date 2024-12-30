@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.INFO)
 app = FastAPI()
 
 #
-@app.post("/api/feedback")
+@app.post("/backend/api/feedback")
 def feedback_endpoint(request: FeedbackRequest):
     try:
         feedback = generate_feedback(request.persona, request.habit_name, request.progress_summary)
@@ -34,4 +34,4 @@ app.add_middleware(
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
