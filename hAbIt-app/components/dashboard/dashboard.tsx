@@ -6,7 +6,7 @@ export default function Dashboard() {
   const [feedback, setFeedback] = useState('');
   {/*'http://localhost:8000/api/feedback'*/}
   const handleFeedbackRequest = async () => {
-    const response = await fetch('/backend/api/feedback', {
+    const response = await fetch('/api/feedback', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.INFO)
 app = FastAPI()
 
 #
-@app.post("/backend/api/feedback")
+@app.post("/api/feedback")
 def feedback_endpoint(request: FeedbackRequest):
     try:
         feedback = generate_feedback(request.persona, request.habit_name, request.progress_summary)
