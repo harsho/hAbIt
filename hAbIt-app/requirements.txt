@@ -1,18 +1,4 @@
 
 fastapi==0.115.6
-fastapi-cli==0.0.7
-h11==0.14.0
-hpack==4.0.0
-html2text==2024.2.26
-httpcore==1.0.7
-httplib2==0.22.0
-httptools==0.6.4
-httpx==0.28.0
-
-oauthlib==3.2.2
 openai==1.55.3
-
-pyparsing==3.2.0
-python-dotenv==1.0.1
-
 uvicorn==0.34.0
